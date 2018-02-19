@@ -16,21 +16,21 @@ const resolvers = {
       const board = new boardModel({name: name});
       return board.save();
     },
-    addTask: (root, {title, description, status, dueDate}) => {
-      const task = new taskModel({title: title, description: description, status: status, dueDate: dueDate});
+    addTask: (root, {id, title, description, status, dueDate}) => {
+      const task = new taskModel({id: id, title: title, description: description, status: status, dueDate: dueDate});
       return task.save();
     },
     deleteBoard: (root, {id}) => {
       return boardModel.findOneAndRemove({id: id})
     },
-    deleteTask: (root, {id}) => {
-      return  taskModel.findOneAndRemove({id: id})
+    deleteTask: (root, {taskId}) => {
+      return  taskModel.findOneAndRemove({taskId: taskId})
     },
     updateBoard: (root, {id, name}) => {
       return boardModel.findOneAndUpdate({id: id}, {name: name})
     },
-    editTask: (root, {id, title, description, status, dueDate}) => {
-      return taskModel.findOneAndUpdate({id: id}, {title: title, description: description, status: status, dueDate: dueDate} )
+    editTask: (root, {taskId, id, title, description, status, dueDate}) => {
+      return taskModel.findOneAndUpdate({taskId: taskId}, {id: id, title: title, description: description, status: status, dueDate: dueDate} )
     }
   }
 }
